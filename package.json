@@ -1,6 +1,6 @@
 {
-  "name": "mesto-russia",
-  "homepage": "https://github.com/juzlov/Mesto-Russia",
+  "name": "mesto-russia-frontend",
+  "homepage": "https://github.com/juzlov/MestoRussiaFrontend",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -11,12 +11,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/juzlov/Mesto-Russia.git"
+    "url": "git+https://github.com/juzlov/MestoRussiaFrontend.git"
   },
   "author": "Ignat Anashin",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/juzlov/Mesto-Russia/issues"
+    "url": "https://github.com/juzlov/MestoRussiaFrontend/issues"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
