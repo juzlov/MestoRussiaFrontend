@@ -20,7 +20,8 @@ export default class CardList {
       carder.link = elem.link;
       carder.likes = elem.likes;
       carder.id = elem.id;
-      carder.create(carder.name, carder.link, carder.likes, carder.id);
+      carder.isLike = elem.isLike;
+      carder.create(carder.name, carder.link, carder.likes, carder.id, carder.isLike);
     });
   }
 
@@ -40,7 +41,15 @@ export default class CardList {
                 initialCard.link = result[i].link;
                 initialCard.likes = result[i].likes.length;
                 initialCard.id = result[i]._id;
-                this.iniCards.push(initialCard);
+                
+                const isLiked = result[i].likes.some((elem) => {
+                  if (elem._id === '5176dd5ab8b6c044a17659a0') {
+                   return true;
+                  }
+                 })
+                                  
+                 initialCard.isLike = isLiked;
+                 this.iniCards.push(initialCard);
           }
           this.render(this.renderCard); 
         })

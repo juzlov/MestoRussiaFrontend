@@ -146,6 +146,7 @@ export default class Card {
     placeCardImage.style.backgroundImage = `url('${this.link}')`;
     placeCardName.textContent = this.name;
     placeCardLikeCounter.textContent = this.likes;
+    
 
     placeCardImage.appendChild(placeCardDeleteIcon);
     placeCardDescription.appendChild(placeCardName);
@@ -155,6 +156,10 @@ export default class Card {
 
     this.placeCard.appendChild(placeCardImage);
     this.placeCard.appendChild(placeCardDescription);
+
+    if (this.isLike) {
+      this.placeCard.querySelector('.place-card__like-icon').classList.add('place-card__like-icon_liked');
+    }
 
     placesList.appendChild(this.placeCard);
     this.setEventListener();
