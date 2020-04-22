@@ -9,9 +9,7 @@ export default class CardList {
   }
 
   addCard(card) {
-    this.card = card;
-    this.card.create();
-    this.card.setEventListener();
+    this.renderCard.create(card);
   }
 
   render(carder) {
@@ -21,7 +19,8 @@ export default class CardList {
       carder.likes = elem.likes;
       carder.id = elem.id;
       carder.isLike = elem.isLike;
-      carder.create(carder.name, carder.link, carder.likes, carder.id, carder.isLike);
+      carder.isMine = elem.isMine;
+      carder.create(carder.name, carder.link, carder.likes, carder.id, carder.isLike, carder.isMine);
     });
   }
 
@@ -47,9 +46,12 @@ export default class CardList {
                    return true;
                   }
                  })
+                
+                const isMine = (result[i].owner._id === '5176dd5ab8b6c044a17659a0');
                                   
-                 initialCard.isLike = isLiked;
-                 this.iniCards.push(initialCard);
+                initialCard.isLike = isLiked;
+                initialCard.isMine = isMine;
+                this.iniCards.push(initialCard);
           }
           this.render(this.renderCard); 
         })
@@ -59,8 +61,12 @@ export default class CardList {
   }
 
   addNewCard(name, link) {
-    this.api.addNewCard(name, link);
-    this.addCard(this.renderCard);
+    this.api.addNewCard(name, link, (elem) => {
+     if (elem) {
+      this.addCard(elem);
+     }
+    });
+    
   }
 }
 

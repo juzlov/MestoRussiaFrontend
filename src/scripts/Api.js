@@ -67,7 +67,7 @@ export default class Api {
     }
 
     // добавление новой карточки
-    addNewCard(name, link) {
+    addNewCard(name, link, callback) {
         return fetch((this.serverUrl + this.options.baseUrl + '/cards'), {
             method: 'POST',
             headers: this.options.headers,
@@ -77,6 +77,13 @@ export default class Api {
                     "link": `${link}`
                 })
         })
+        .then(res => res.json())
+            .then((result) => {
+                if (callback) {
+                    callback(result);
+                }
+            })
+            .catch(err => console.log(err));
     }
 
     //удаление карточки

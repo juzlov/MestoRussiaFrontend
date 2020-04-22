@@ -10,40 +10,25 @@ export default class Card {
 
   }
 
-  like(result, idCard) {
+  like(result) {
     this.result = result;
-    this.idCard = idCard;
 
-    const listOfPlaces = document.querySelectorAll('.place-card');
-    
-    for (let i = 0; i < this.cards.length; i++) {
-      let keys = Object.values(this.cards[i]);
-        if (keys[3] === this.idCard) {
-          listOfPlaces[i].querySelector('.place-card__like-counter').textContent = this.result;
-          listOfPlaces[i].querySelector('.place-card__like-icon').classList.toggle('place-card__like-icon_liked');
-        }
-    }   
+    this.placeCard.querySelector('.place-card__like-counter').textContent = this.result;
+    this.placeCard.querySelector('.place-card__like-icon').classList.toggle('place-card__like-icon_liked');
   }
 
-  likeDelete(result, idCard) {
+  likeDelete(result) {
     this.result = result;
-    this.idCard = idCard;
 
-    const listOfPlaces = document.querySelectorAll('.place-card');
-    
-    for (let i = 0; i < this.cards.length; i++) {
-      let keys = Object.values(this.cards[i]);
-        if (keys[3] === this.idCard) {
-          listOfPlaces[i].querySelector('.place-card__like-counter').textContent = this.result;
-          listOfPlaces[i].querySelector('.place-card__like-icon').classList.toggle('place-card__like-icon_liked');
-        }
-    }   
+    this.placeCard.querySelector('.place-card__like-counter').textContent = this.result;
+    this.placeCard.querySelector('.place-card__like-icon').classList.toggle('place-card__like-icon_liked');
   }
 
   setEventListener() {
     let api = this.api;
     let id = this.id;
     let thiscard = this;
+
     this.placeCard.querySelector('.place-card__delete-icon').addEventListener('click', function (event) {
       const listOfPlaces = document.querySelectorAll('.place-card');
       api.deleteCard(id)
@@ -55,14 +40,12 @@ export default class Card {
           }
         }).then((res) => {
             if (res.message === "Пост удалён") {
-              
-              for (let i = 0; i < listOfPlaces.length; i++) {
-                if (listOfPlaces[i].contains(event.target)) {
-                  thiscard.remove(id);                                                                 
-                }
-              }  
+              this.closest('.place-card').remove();
             }
           })
+          .catch((err) => {
+            console.log(err);
+        });
     });
 
     this.placeCard.querySelector('.place-card__like-icon').addEventListener('click', function (event) {
@@ -79,7 +62,7 @@ export default class Card {
                 }).then((res) => {
                     return res.likes.length;
                 }).then((res) => {
-                    thiscard.like(res, id);
+                    thiscard.like(res);
                 })
                 .catch((err) => {
                     console.log(err);
@@ -97,7 +80,7 @@ export default class Card {
                 }).then((res) => {
                     return res.likes.length;
                 }).then((res) => {
-                    thiscard.likeDelete(res, id);
+                    thiscard.likeDelete(res);
                 })
                 .catch((err) => {
                     console.log(err);
@@ -108,19 +91,20 @@ export default class Card {
     });
   }
 
-  remove(cardId) {
-    this.cardId = cardId;
-
-    const listOfPlaces = document.querySelectorAll('.place-card');
-      for (let i = 0; i < this.cards.length; i++) {
-        let keys = Object.values(this.cards[i]);
-            if (keys[3] === this.cardId) {
-            listOfPlaces[i].closest('.place-card').remove();
-          }
-      }
+  remove() {
+    this.placeCard.parentElement.removeChild(this.placeCard);
   }
 
-  create() {
+  create(card) {    
+    if (typeof(card.name) != 'undefined') {
+      this.name = card.name;
+      this.link = card.link;
+      this.likes = card.likes;
+      this.id = card._id;
+      this.isMine = true;
+      this.isLike = false;
+    }
+
     let placesList = document.querySelector('.places-list');
 
     this.placeCard = document.createElement('div');
@@ -142,13 +126,11 @@ export default class Card {
     placeCardLikeCounter.classList.add('place-card__like-counter');
     placeCardLikeContainer.classList.add('place-card__like-container');
 
-
     placeCardImage.style.backgroundImage = `url('${this.link}')`;
     placeCardName.textContent = this.name;
     placeCardLikeCounter.textContent = this.likes;
-    
-
-    placeCardImage.appendChild(placeCardDeleteIcon);
+            
+    placeCardImage.appendChild(placeCardDeleteIcon); 
     placeCardDescription.appendChild(placeCardName);
     placeCardDescription.appendChild(placeCardLikeContainer);
     placeCardLikeContainer.appendChild(placeCardLikeIcon);
@@ -163,6 +145,11 @@ export default class Card {
 
     placesList.appendChild(this.placeCard);
     this.setEventListener();
+
+    if (!this.isMine) {
+      this.placeCard.querySelector('.place-card__delete-icon').classList.add('place-card__delete-icon_not-mine');
+    }
     return this.placeCard;
   }
+
 }

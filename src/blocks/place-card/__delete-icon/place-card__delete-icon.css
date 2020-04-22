@@ -10,6 +10,7 @@
   cursor: pointer;
 }
 
-.place-card:hover .place-card__delete-icon {
-  display: block;
+.place-card__delete-icon_not-mine {
+  display: none;
 }
+
