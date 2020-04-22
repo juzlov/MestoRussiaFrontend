@@ -4,12 +4,14 @@
 export default class PopUpImageCard {
   open(event) {     
     if (event.target.classList.contains('place-card__image') === true) {
-      const imageSrc = event.target.style.backgroundImage;
+      const imageUrl = event.target.style.backgroundImage;
+      const imageSrcFirst = imageUrl.replace(`url("`, "");
+      const imageSrcFinal = imageSrcFirst.replace(`")`, "");
       const image = document.querySelector('.popup-image');
       const imageSource = document.querySelector('.popup__place-image-src');
 
       image.classList.toggle('popup_is-opened');
-      imageSource.insertAdjacentHTML('beforeend', `<img class="popup__place-image" style='background-image: ${imageSrc};'>`)
+      imageSource.insertAdjacentHTML('beforeend', `<img class="popup__place-image" src='${imageSrcFinal}'>`)
     }
   }
 

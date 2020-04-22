@@ -6,6 +6,7 @@
 @import url(./__button/popup__button.css);
 @import url(./_is-opened/popup_is-opened.css);
 @import url(./__place-image/popup__place-image.css);
+@import url(./__place-image/popup__place-image-src.css);
 
 
 .popup {
@@ -36,7 +37,4 @@
 
 .input-container__invalid .input__text {
   border-color: #FF3333;
-}
-
-.input-container__invalid {
 }
