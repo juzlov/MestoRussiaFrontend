@@ -10,18 +10,34 @@ export default class Card {
 
   }
 
-  like(result) {
+  like(result, idCard) {
     this.result = result;
+    this.idCard = idCard;
 
-    this.placeCard.querySelector('.place-card__like-counter').textContent = this.result;
-    this.placeCard.querySelector('.place-card__like-icon').classList.toggle('place-card__like-icon_liked');
+    const listOfPlaces = document.querySelectorAll('.place-card');
+   
+    for (let i = 0; i < this.cards.length; i++) {
+      let keys = Object.values(this.cards[i]);
+        if (keys[3] === this.idCard) {
+          listOfPlaces[i].querySelector('.place-card__like-counter').textContent = this.result;
+          listOfPlaces[i].querySelector('.place-card__like-icon').classList.toggle('place-card__like-icon_liked');
+        }
+    }   
   }
 
-  likeDelete(result) {
+  likeDelete(result, idCard) {
     this.result = result;
+    this.idCard = idCard;
 
-    this.placeCard.querySelector('.place-card__like-counter').textContent = this.result;
-    this.placeCard.querySelector('.place-card__like-icon').classList.toggle('place-card__like-icon_liked');
+    const listOfPlaces = document.querySelectorAll('.place-card');
+    
+    for (let i = 0; i < this.cards.length; i++) {
+      let keys = Object.values(this.cards[i]);
+        if (keys[3] === this.idCard) {
+          listOfPlaces[i].querySelector('.place-card__like-counter').textContent = this.result;
+          listOfPlaces[i].querySelector('.place-card__like-icon').classList.toggle('place-card__like-icon_liked');
+        }
+    }   
   }
 
   setEventListener() {
@@ -62,7 +78,8 @@ export default class Card {
                 }).then((res) => {
                     return res.likes.length;
                 }).then((res) => {
-                    thiscard.like(res);
+                  console.log(listOfPlaces[i], thiscard);
+                  thiscard.like(res, id);
                 })
                 .catch((err) => {
                     console.log(err);
@@ -80,7 +97,7 @@ export default class Card {
                 }).then((res) => {
                     return res.likes.length;
                 }).then((res) => {
-                    thiscard.likeDelete(res);
+                    thiscard.likeDelete(res, id);
                 })
                 .catch((err) => {
                     console.log(err);
