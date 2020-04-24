@@ -72,7 +72,6 @@ popupNewButton.addEventListener('click', function (event) {
     popupNew.classList.toggle('popup_is-opened');
 });
 
-
 author.addEventListener('input', function() {
     popupEditCard.validateName(validation);
 });
@@ -93,9 +92,3 @@ popupCloseEdit.addEventListener('click', popupEditCard.close);
 placeButtonDisabler(event);
 editButtonDisabler();
 formDefault();
-
-
-
-
-
-

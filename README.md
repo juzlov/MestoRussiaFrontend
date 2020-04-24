@@ -1,45 +1,61 @@
-# Mesto-Russia
-Проект Mesto Russia - это одностраничный сайт, созданный в рамках образовательного курса Яндекс Практикум.
-Используя Javascript реализован функционал сайта:
-- Добавление карточки с фото и именем
-- Удаление собственной карточки нажатием на кнопку корзины
-- Поставка и снятие лайка, счетчик лайков
-- Редактирование имени пользователя (+валидация)
+# Mesto-Russia (Frontend)
+Mesto Russia (frontend) is fronted part of Mesto Russia project, developed as part of [Yandex-Praktikum](https://praktikum.yandex.ru/) training program.
 
-## Использованные технологии
-HTML, CSS, JS, Webpack
+Version 1.1.0
 
-## Ссылка на проект
-https://juzlov.github.io/Mesto-Russia/
+## About
 
-## Как установить?
+This project is an independent frontend part that can be linked to the [Mesto Russia backend](https://github.com/juzlov/Mesto-Russia)
+This is an interactive page where you can add photos, delete them, and put likes on photos.
+
+- Javascript structure is implemented via Classes
+- To update page information, fetch requests are sent to the server
+- Fields are validated via a separate Class
+- The project is built by Webpack
+
+The following functionality is implemented:
+- User can add card with picture and name
+- Delete your own card by clicking the trash button (the trash is displayed only for your own cards)
+- Putting and removing likes; Auto-count likes
+- Editing user name and "about" field (+validation)
+- Photos open in a separate popup by clicking on the image
+
+Frontend requests to the server that stores cards and information about users. 
+Server gives all this information every page update.
+
+## Used in project
+- **HTML**
+- **CSS**
+- **JS**
+- **Webpack**
+
+## Demo
+
+[Mesto Russia Frontend](https://juzlov.github.io/MestoRussiaFrontend/)
+
+![Main page](https://github.com/juzlov/MestoRussiaFrontend/blob/master/src/images/MestoRussiaFrontend-Demo.PNG)
+
+## How to start
+Please, before start check versions of following components:
 npm version - 6.13.4
 node.js version - 12.16.1
 
-Клонирование проекта:
+1. Clone project:
 ```
-git clone https://github.com/juzlov/Mesto-Russia.git
-```
-
-Установка зависимостей:
-```
-npm install
+git clone https://github.com/juzlov/MestoRussiaFrontend.git
 ```
 
-Создание локального сервера:
+2. Run local server
 ```
 npm run dev
 ```
 
-Сборка текущей версии:
+Building the current version:
 ```
 npm run build
 ```
 
-Деплой на Github Pages:
+Deploy on Github Pages:
 ```
 npm run deploy
 ```
-
-## Версия
-1.1.0
