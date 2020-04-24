@@ -6,6 +6,7 @@ Version 1.1.0
 ## About
 
 This project is an independent frontend part that can be linked to the [Mesto Russia backend](https://github.com/juzlov/Mesto-Russia)
+
 This is an interactive page where you can add photos, delete them, and put likes on photos.
 
 - Javascript structure is implemented via Classes
